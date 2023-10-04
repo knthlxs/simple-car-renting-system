@@ -24,7 +24,6 @@
         /// </summary>
         private void InitializeComponent() {
             lblTitle = new Label();
-            lblCarDetails = new Label();
             lblTypeOfCar = new Label();
             lblBrand = new Label();
             lblModel = new Label();
@@ -50,6 +49,7 @@
             lblAmountToPay = new Label();
             lblPaymentTitle = new Label();
             panelRent = new Panel();
+            txtRentingSummary = new TextBox();
             panelPayement.SuspendLayout();
             panelRent.SuspendLayout();
             SuspendLayout();
@@ -63,17 +63,6 @@
             lblTitle.Size = new Size(931, 128);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "Car Renting System";
-            // 
-            // lblCarDetails
-            // 
-            lblCarDetails.AutoSize = true;
-            lblCarDetails.CausesValidation = false;
-            lblCarDetails.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lblCarDetails.Location = new Point(1029, 211);
-            lblCarDetails.Name = "lblCarDetails";
-            lblCarDetails.Size = new Size(185, 25);
-            lblCarDetails.TabIndex = 2;
-            lblCarDetails.Text = "RENTING SUMMARY";
             // 
             // lblTypeOfCar
             // 
@@ -195,7 +184,7 @@
             // btnRentCar
             // 
             btnRentCar.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            btnRentCar.Location = new Point(350, 603);
+            btnRentCar.Location = new Point(343, 617);
             btnRentCar.Name = "btnRentCar";
             btnRentCar.Size = new Size(223, 81);
             btnRentCar.TabIndex = 15;
@@ -206,9 +195,9 @@
             // btnPayment
             // 
             btnPayment.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            btnPayment.Location = new Point(1029, 791);
+            btnPayment.Location = new Point(1014, 791);
             btnPayment.Name = "btnPayment";
-            btnPayment.Size = new Size(356, 37);
+            btnPayment.Size = new Size(423, 37);
             btnPayment.TabIndex = 16;
             btnPayment.Text = "PROCEED TO PAYMENT";
             btnPayment.UseVisualStyleBackColor = true;
@@ -219,7 +208,7 @@
             // 
             lblTotalPrice.AutoSize = true;
             lblTotalPrice.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTotalPrice.Location = new Point(1029, 669);
+            lblTotalPrice.Location = new Point(1014, 740);
             lblTotalPrice.Name = "lblTotalPrice";
             lblTotalPrice.Size = new Size(0, 37);
             lblTotalPrice.TabIndex = 17;
@@ -259,6 +248,7 @@
             txtPaymentValue.PlaceholderText = "0";
             txtPaymentValue.Size = new Size(261, 23);
             txtPaymentValue.TabIndex = 14;
+            txtPaymentValue.Text = "0";
             txtPaymentValue.Leave += txtPaymentValue_Leave;
             // 
             // lblPayment
@@ -277,10 +267,9 @@
             lblChangeValue.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             lblChangeValue.Location = new Point(725, 497);
             lblChangeValue.Name = "lblChangeValue";
-            lblChangeValue.Size = new Size(27, 32);
+            lblChangeValue.Size = new Size(79, 32);
             lblChangeValue.TabIndex = 12;
-            lblChangeValue.Text = "0";
-            lblChangeValue.Visible = false;
+            lblChangeValue.Text = "₱ 0.00";
             // 
             // lblChange
             // 
@@ -291,7 +280,6 @@
             lblChange.Size = new Size(108, 32);
             lblChange.TabIndex = 11;
             lblChange.Text = "Change: ";
-            lblChange.Visible = false;
             // 
             // lblAmountToPayValue
             // 
@@ -299,9 +287,9 @@
             lblAmountToPayValue.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             lblAmountToPayValue.Location = new Point(725, 307);
             lblAmountToPayValue.Name = "lblAmountToPayValue";
-            lblAmountToPayValue.Size = new Size(27, 32);
+            lblAmountToPayValue.Size = new Size(79, 32);
             lblAmountToPayValue.TabIndex = 10;
-            lblAmountToPayValue.Text = "0";
+            lblAmountToPayValue.Text = "₱ 0.00";
             // 
             // lblAmountToPay
             // 
@@ -326,6 +314,7 @@
             // panelRent
             // 
             panelRent.BackColor = SystemColors.ActiveCaption;
+            panelRent.Controls.Add(txtRentingSummary);
             panelRent.Controls.Add(lblTotalPrice);
             panelRent.Controls.Add(btnPayment);
             panelRent.Controls.Add(btnRentCar);
@@ -341,12 +330,23 @@
             panelRent.Controls.Add(lblModel);
             panelRent.Controls.Add(lblBrand);
             panelRent.Controls.Add(lblTypeOfCar);
-            panelRent.Controls.Add(lblCarDetails);
             panelRent.Controls.Add(lblTitle);
             panelRent.Location = new Point(3, 4);
             panelRent.Name = "panelRent";
             panelRent.Size = new Size(1488, 855);
             panelRent.TabIndex = 19;
+            // 
+            // txtRentingSummary
+            // 
+            txtRentingSummary.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            txtRentingSummary.Location = new Point(1014, 211);
+            txtRentingSummary.Multiline = true;
+            txtRentingSummary.Name = "txtRentingSummary";
+            txtRentingSummary.ReadOnly = true;
+            txtRentingSummary.ScrollBars = ScrollBars.Vertical;
+            txtRentingSummary.Size = new Size(423, 487);
+            txtRentingSummary.TabIndex = 18;
+            txtRentingSummary.WordWrap = false;
             // 
             // ManageOrder
             // 
@@ -370,7 +370,6 @@
         #endregion
 
         private Label lblTitle;
-        public Label lblCarDetails;
         private Label lblTypeOfCar;
         private Label lblBrand;
         private Label lblModel;
@@ -396,5 +395,6 @@
         private Label lblAmountToPay;
         private Label lblPaymentTitle;
         private Panel panelRent;
+        private TextBox txtRentingSummary;
     }
 }

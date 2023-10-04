@@ -12,9 +12,9 @@ namespace CarRentingSystem {
             this.fuelEconomy = fuelEconomy;
         }
 
-        public override void showCarDetails(Label lbl) {
-            base.showCarDetails(lbl);
-            lbl.Text += $"\nFuel Economy: {fuelEconomy} mpg";
+        public override void showCarDetails(TextBox txt) {
+            base.showCarDetails(txt);
+            txt.Text += $"\r\nFuel Economy: {fuelEconomy} mpg";
         }
     }
 }

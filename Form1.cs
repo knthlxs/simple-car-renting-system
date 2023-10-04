@@ -67,19 +67,21 @@ namespace CarRentingSystem {
         private void displayOrder() {
 
             if (!string.IsNullOrEmpty(this.txtTypeOfCar.Text) && !string.IsNullOrEmpty(this.txtBrand.Text) && !string.IsNullOrEmpty(this.txtModel.Text) && !string.IsNullOrEmpty(this.txtSeatNum.Text) && !string.IsNullOrEmpty(this.txtDays.Text)) {
+                txtRentingSummary.Text += "RENTING SUMMARY";
+
                 foreach (var car in rentedCar) {
                     if (car is Hybrid) {
-                        lblCarDetails.Text += "\n\nType of Car: Hybrid\n";
+                        txtRentingSummary.Text += "\r\n\r\nType of Car: Hybrid\r\n";
                     } else if (car is Electric) {
-                        lblCarDetails.Text += "\n\nType of Car: Electric\n";
+                        txtRentingSummary.Text += "\r\n\r\nType of Car: Electric\r\n";
                     } else if (car is Diesel) {
-                        lblCarDetails.Text += "\n\nType of Car: Diesel\n";
+                        txtRentingSummary.Text += "\r\n\r\nType of Car: Diesel\r\n";
                     } else {
-                        lblCarDetails.Text += "\n\nType of Car: Others\n";
+                        txtRentingSummary.Text += "\r\n\r\nType of Car: Others\r\n";
                     }
                     totalPrice = calculateTotalPrice(car.getPrice(), car.days);
 
-                    car.showCarDetails(lblCarDetails);
+                    car.showCarDetails(txtRentingSummary);
                 }
                 //btnRentAgain.Visible = true;
                 lblTotalPrice.Text = $"Total Price: ₱ {totalPrice.ToString()}.00";
@@ -154,42 +156,49 @@ namespace CarRentingSystem {
          
          */
         private void txtPaymentValue_Leave(object sender, EventArgs e) {
-            payment = Convert.ToDouble(txtPaymentValue.Text);
-            if (payment >= totalPrice) {
-                lblChange.Visible = true;
-                lblChangeValue.Visible = true;
+            try {
+                payment = Convert.ToDouble(txtPaymentValue.Text);
 
-                change = payment - totalPrice;
+                if (payment >= totalPrice) {
+                    lblChange.Visible = true;
+                    lblChangeValue.Visible = true;
 
-                lblChangeValue.Text = $"₱ {change.ToString()}.00";
-            } else {
-                lblChange.Visible = false;
-                lblChangeValue.Visible = false;
+                    change = payment - totalPrice;
 
+                    lblChangeValue.Text = $"₱ {change.ToString()}.00";
+                }
+            } catch (FormatException) {
+                MessageBox.Show("Please input a number only.", "Invalid input");
             }
+
 
         }
 
         private void btnPay_Click(object sender, EventArgs e) {
-            payment = Convert.ToDouble(txtPaymentValue.Text);
-            if (payment >= totalPrice) {
-                MessageBox.Show("Payment success. Thank you for renting car on our shop!");
-                panelRent.Visible = true;
-                panelPayement.Visible = false;
-                totalPrice = 0;
-                rentedCar.Clear();
-                lblCarDetails.Text = string.Empty;
-                lblTotalPrice.Text = string.Empty;
-                lblChange.Visible = false;
-                lblChangeValue.Visible = false;
-                btnRentCar.Visible = true;
-                btnPayment.Visible = false;
-                payment = 0;
-                txtPaymentValue.Text = payment.ToString();
+            try {
+                payment = Convert.ToDouble(txtPaymentValue.Text);
+                if (payment >= totalPrice) {
+                    MessageBox.Show("Payment success. Thank you for renting car on our shop!");
+                    panelRent.Visible = true;
+                    panelPayement.Visible = false;
+                    totalPrice = 0;
+                    rentedCar.Clear();
+                    txtRentingSummary.Text = string.Empty;
+                    lblTotalPrice.Text = string.Empty;
+                    lblChange.Visible = false;
+                    lblChangeValue.Visible = false;
+                    btnRentCar.Visible = true;
+                    btnPayment.Visible = false;
+                    payment = 0;
+                    txtPaymentValue.Text = payment.ToString();
 
-            } else {
-                MessageBox.Show("Insufficient balance, please try again.");
+                } else {
+                    MessageBox.Show("Insufficient balance, please try again.");
+                }
+            } catch (FormatException) {
+                MessageBox.Show("Please input a number only.", "Invalid input");
             }
+
         }
     }
 }

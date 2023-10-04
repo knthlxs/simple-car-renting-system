@@ -10,9 +10,9 @@ namespace CarRentingSystem {
         public Diesel(string brand, string model, int seatNum, int days, double fuelEfficiency) : base(brand, model, seatNum, days) {
             this.fuelEfficiency = fuelEfficiency;
         }
-        public override void showCarDetails(Label lbl) {
-            base.showCarDetails(lbl);
-            lbl.Text += $"\nFuel Efficiency: {fuelEfficiency} mpg";
+        public override void showCarDetails(TextBox txt) {
+            base.showCarDetails(txt);
+            txt.Text += $"\r\nFuel Efficiency: {fuelEfficiency} mpg";
         }
     }
 }

@@ -27,8 +27,8 @@ namespace CarRentingSystem {
             this.days = days;
         }
 
-        public virtual void showCarDetails(Label lbl) {
-            lbl.Text += $"Brand: {brand}\nModel: {model}\nNo. of seats: {seatNum}\nNo. of days: {days}";
+        public virtual void showCarDetails(TextBox txt) {
+            txt.Text += $"Brand: {brand}\r\nModel: {model}\r\nNo. of seats: {seatNum}\r\nNo. of days: {days}";
         }
     }
 }

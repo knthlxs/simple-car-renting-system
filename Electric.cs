@@ -11,9 +11,9 @@ namespace CarRentingSystem {
             this.batteryRange = batteryRange;
         }
 
-        public override void showCarDetails(Label lbl) {
-            base.showCarDetails(lbl);
-            lbl.Text += $"\nBattery Range: {batteryRange} miles";
+        public override void showCarDetails(TextBox txt) {
+            base.showCarDetails(txt);
+            txt.Text += $"\r\nBattery Range: {batteryRange} miles";
         }
     }
 }
