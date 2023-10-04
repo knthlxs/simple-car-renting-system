@@ -92,17 +92,18 @@ namespace CarRentingSystem {
                 lblFuel.Text = "Fuel Efficiency (mpg)";
                 txtFuel.Visible = true;
                 lblFuel.Visible = true;
-            } else if (txtTypeOfCar.Text.ToLower().Equals("others")) {
+            } else {
                 lblFuel.Text = "";
                 txtFuel.Visible = false;
-            } else {
-                MessageBox.Show("Please input correct car type (Hybrid, Electric, Diesel, Others) only.", "Invalid car type");
-                txtTypeOfCar.Text = "";
             }
+            //else {
+            //    MessageBox.Show("Please input correct car type (Hybrid, Electric, Diesel, Others) only.", "Invalid car type");
+            //    txtTypeOfCar.Text = "";
+            //}
         }
 
         private void clearAllText() {
-            //txtTypeOfCar.Text = string.Empty;
+            txtTypeOfCar.Text = string.Empty;
             txtBrand.Text = string.Empty;
             txtModel.Text = string.Empty;
             txtSeatNum.Text = string.Empty;
@@ -122,6 +123,7 @@ namespace CarRentingSystem {
                     displayOrder();
                     btnPayment.Visible = true;
                 }
+
                 clearAllText();
             } catch (Exception) {
                 MessageBox.Show("Please input all the required fields.", "Incomplete input");
@@ -129,6 +131,7 @@ namespace CarRentingSystem {
         }
 
         private void btnPayment_Click(object sender, EventArgs e) {
+
             lblAmountToPayValue.Text = $"₱ {totalPrice.ToString()}.00";
             panelRent.Visible = false;
             panelPayement.Visible = true;
@@ -199,5 +202,15 @@ namespace CarRentingSystem {
                 txtBrand.Text = "";
             }
         }
+
+      
+
+        private void txtPaymentValue_Click(object sender, EventArgs e) {
+            txtPaymentValue.Text = "";
+        }
+
+        /*TO CODE
+         Days must be greater than 0
+         */
     }
 }

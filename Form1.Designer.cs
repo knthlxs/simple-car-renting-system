@@ -210,7 +210,7 @@
             // 
             lblTotalPrice.AutoSize = true;
             lblTotalPrice.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTotalPrice.Location = new Point(1014, 740);
+            lblTotalPrice.Location = new Point(1014, 730);
             lblTotalPrice.Name = "lblTotalPrice";
             lblTotalPrice.Size = new Size(0, 37);
             lblTotalPrice.TabIndex = 17;
@@ -251,6 +251,7 @@
             txtPaymentValue.Size = new Size(261, 23);
             txtPaymentValue.TabIndex = 14;
             txtPaymentValue.Text = "0";
+            txtPaymentValue.Click += txtPaymentValue_Click;
             txtPaymentValue.Leave += txtPaymentValue_Leave;
             // 
             // lblPayment
