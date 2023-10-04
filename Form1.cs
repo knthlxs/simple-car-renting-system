@@ -22,7 +22,7 @@ namespace CarRentingSystem {
         //}
         public ManageOrder() {
             InitializeComponent();
-          
+
         }
 
         private void getOrder() {
@@ -143,11 +143,11 @@ namespace CarRentingSystem {
         }
 
         private void btnPayment_Click(object sender, EventArgs e) {
-                //lblAmountToPayValue.Text = TotalPrice.ToString();
-                lblAmountToPayValue.Text = $"₱ {totalPrice.ToString()}.00" ;
-                panelRent.Visible = false;
-                panelPayement.Visible = true;
-           
+            //lblAmountToPayValue.Text = TotalPrice.ToString();
+            lblAmountToPayValue.Text = $"₱ {totalPrice.ToString()}.00";
+            panelRent.Visible = false;
+            panelPayement.Visible = true;
+
 
         }
         /*PROBLEM
@@ -174,8 +174,8 @@ namespace CarRentingSystem {
             payment = Convert.ToDouble(txtPaymentValue.Text);
             if (payment >= totalPrice) {
                 MessageBox.Show("Payment success. Thank you for renting car on our shop!");
-                panelRent.Visible=true;
-                panelPayement.Visible=false;
+                panelRent.Visible = true;
+                panelPayement.Visible = false;
                 totalPrice = 0;
                 rentedCar.Clear();
                 lblCarDetails.Text = string.Empty;

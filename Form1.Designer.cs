@@ -67,6 +67,7 @@
             // lblCarDetails
             // 
             lblCarDetails.AutoSize = true;
+            lblCarDetails.CausesValidation = false;
             lblCarDetails.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             lblCarDetails.Location = new Point(1029, 211);
             lblCarDetails.Name = "lblCarDetails";
@@ -205,9 +206,9 @@
             // btnPayment
             // 
             btnPayment.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            btnPayment.Location = new Point(1029, 747);
+            btnPayment.Location = new Point(1029, 791);
             btnPayment.Name = "btnPayment";
-            btnPayment.Size = new Size(356, 81);
+            btnPayment.Size = new Size(356, 37);
             btnPayment.TabIndex = 16;
             btnPayment.Text = "PROCEED TO PAYMENT";
             btnPayment.UseVisualStyleBackColor = true;
@@ -236,7 +237,7 @@
             panelPayement.Controls.Add(lblPaymentTitle);
             panelPayement.Location = new Point(2, 4);
             panelPayement.Name = "panelPayement";
-            panelPayement.Size = new Size(1469, 837);
+            panelPayement.Size = new Size(1489, 855);
             panelPayement.TabIndex = 18;
             panelPayement.Visible = false;
             // 
@@ -344,7 +345,7 @@
             panelRent.Controls.Add(lblTitle);
             panelRent.Location = new Point(3, 4);
             panelRent.Name = "panelRent";
-            panelRent.Size = new Size(1468, 833);
+            panelRent.Size = new Size(1488, 855);
             panelRent.TabIndex = 19;
             // 
             // ManageOrder
@@ -352,9 +353,10 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
+            BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(1493, 861);
-            Controls.Add(panelPayement);
             Controls.Add(panelRent);
+            Controls.Add(panelPayement);
             Name = "ManageOrder";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Car Renting";
