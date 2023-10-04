@@ -119,7 +119,7 @@
             txtTypeOfCar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtTypeOfCar.Location = new Point(72, 239);
             txtTypeOfCar.Name = "txtTypeOfCar";
-            txtTypeOfCar.PlaceholderText = "Hybrid, Electric, Diesel, ...";
+            txtTypeOfCar.PlaceholderText = "Hybrid, Electric, Diesel, Others";
             txtTypeOfCar.Size = new Size(348, 29);
             txtTypeOfCar.TabIndex = 8;
             txtTypeOfCar.Leave += txtTypeOfCar_Leave;
@@ -150,6 +150,7 @@
             txtSeatNum.PlaceholderText = "4, 5, 7, 10, 15";
             txtSeatNum.Size = new Size(348, 29);
             txtSeatNum.TabIndex = 11;
+            txtSeatNum.Leave += txtSeatNum_Leave;
             // 
             // txtDays
             // 
@@ -233,7 +234,7 @@
             // btnPay
             // 
             btnPay.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            btnPay.Location = new Point(609, 622);
+            btnPay.Location = new Point(609, 640);
             btnPay.Name = "btnPay";
             btnPay.Size = new Size(251, 76);
             btnPay.TabIndex = 15;
@@ -243,7 +244,7 @@
             // 
             // txtPaymentValue
             // 
-            txtPaymentValue.Location = new Point(725, 414);
+            txtPaymentValue.Location = new Point(725, 432);
             txtPaymentValue.Name = "txtPaymentValue";
             txtPaymentValue.PlaceholderText = "0";
             txtPaymentValue.Size = new Size(261, 23);
@@ -255,7 +256,7 @@
             // 
             lblPayment.AutoSize = true;
             lblPayment.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            lblPayment.Location = new Point(482, 405);
+            lblPayment.Location = new Point(482, 423);
             lblPayment.Name = "lblPayment";
             lblPayment.Size = new Size(237, 32);
             lblPayment.TabIndex = 13;
@@ -265,7 +266,7 @@
             // 
             lblChangeValue.AutoSize = true;
             lblChangeValue.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            lblChangeValue.Location = new Point(725, 497);
+            lblChangeValue.Location = new Point(725, 515);
             lblChangeValue.Name = "lblChangeValue";
             lblChangeValue.Size = new Size(79, 32);
             lblChangeValue.TabIndex = 12;
@@ -275,7 +276,7 @@
             // 
             lblChange.AutoSize = true;
             lblChange.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            lblChange.Location = new Point(482, 497);
+            lblChange.Location = new Point(482, 515);
             lblChange.Name = "lblChange";
             lblChange.Size = new Size(108, 32);
             lblChange.TabIndex = 11;
@@ -285,7 +286,7 @@
             // 
             lblAmountToPayValue.AutoSize = true;
             lblAmountToPayValue.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            lblAmountToPayValue.Location = new Point(725, 307);
+            lblAmountToPayValue.Location = new Point(725, 325);
             lblAmountToPayValue.Name = "lblAmountToPayValue";
             lblAmountToPayValue.Size = new Size(79, 32);
             lblAmountToPayValue.TabIndex = 10;
@@ -295,7 +296,7 @@
             // 
             lblAmountToPay.AutoSize = true;
             lblAmountToPay.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            lblAmountToPay.Location = new Point(482, 307);
+            lblAmountToPay.Location = new Point(482, 325);
             lblAmountToPay.Name = "lblAmountToPay";
             lblAmountToPay.Size = new Size(186, 32);
             lblAmountToPay.TabIndex = 9;
