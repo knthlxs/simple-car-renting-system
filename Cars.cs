@@ -28,7 +28,7 @@ namespace CarRentingSystem {
         }
 
         public virtual void showCarDetails(TextBox txt) {
-            txt.Text += $"Brand: {brand}\r\nModel: {model}\r\nNo. of seats: {seatNum}\r\nNo. of days: {days}";
+            txt.Text += $"Brand: {$"{brand[0].ToString().ToUpper()}{brand.Substring(1)}"}\r\nModel: {string.Concat(model[0].ToString().ToUpper(), model.AsSpan(1))}\r\nNo. of seats: {seatNum}\r\nNo. of days: {days}";
         }
     }
 }

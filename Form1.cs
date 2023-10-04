@@ -13,9 +13,8 @@ namespace CarRentingSystem {
         List<Cars> rentedCar = new List<Cars>();
         public double totalPrice, payment, change;
         private byte[] seatNum = { 4, 5, 7, 10, 15 };
-        //private string[] carTypeArr = { "Hybrid", "Electric", "Diesel", "Others" };
-        //string carTypeTxt;
-
+        private bool correctSeat = false;
+        private bool correctBrand = false;
         public ManageOrder() {
             InitializeComponent();
         }
@@ -55,15 +54,9 @@ namespace CarRentingSystem {
             return totalPrice;
         }
 
-        public double getTotalPrice() {
-            return totalPrice;
-        }
-
         private void displayOrder() {
-
             if (!string.IsNullOrEmpty(this.txtTypeOfCar.Text) && !string.IsNullOrEmpty(this.txtBrand.Text) && !string.IsNullOrEmpty(this.txtModel.Text) && !string.IsNullOrEmpty(this.txtSeatNum.Text) && !string.IsNullOrEmpty(this.txtDays.Text)) {
                 txtRentingSummary.Text += "RENTING SUMMARY";
-
                 foreach (var car in rentedCar) {
                     if (car is Hybrid) {
                         txtRentingSummary.Text += "\r\n\r\nType of Car: Hybrid\r\n";
@@ -82,7 +75,6 @@ namespace CarRentingSystem {
             } else {
                 MessageBox.Show("Please input all required fields.");
             }
-
         }
 
 
@@ -100,18 +92,17 @@ namespace CarRentingSystem {
                 lblFuel.Text = "Fuel Efficiency (mpg)";
                 txtFuel.Visible = true;
                 lblFuel.Visible = true;
-
             } else if (txtTypeOfCar.Text.ToLower().Equals("others")) {
                 lblFuel.Text = "";
                 txtFuel.Visible = false;
             } else {
-                MessageBox.Show("Please input correct car type.");
+                MessageBox.Show("Please input correct car type (Hybrid, Electric, Diesel, Others) only.", "Invalid car type");
                 txtTypeOfCar.Text = "";
             }
         }
 
         private void clearAllText() {
-            txtTypeOfCar.Text = string.Empty;
+            //txtTypeOfCar.Text = string.Empty;
             txtBrand.Text = string.Empty;
             txtModel.Text = string.Empty;
             txtSeatNum.Text = string.Empty;
@@ -121,11 +112,9 @@ namespace CarRentingSystem {
             txtFuel.Visible = false;
         }
 
-
         private void btnRentCar_Click(object sender, EventArgs e) {
             try {
                 getOrder();
-
                 DialogResult choice = MessageBox.Show("Do you want to rent another car?", "Rent another car", MessageBoxButtons.YesNo);
 
                 if (choice == DialogResult.No) {
@@ -137,8 +126,6 @@ namespace CarRentingSystem {
             } catch (Exception) {
                 MessageBox.Show("Please input all the required fields.", "Incomplete input");
             }
-
-
         }
 
         private void btnPayment_Click(object sender, EventArgs e) {
@@ -150,7 +137,6 @@ namespace CarRentingSystem {
         private void txtPaymentValue_Leave(object sender, EventArgs e) {
             try {
                 payment = Convert.ToDouble(txtPaymentValue.Text);
-
                 if (payment >= totalPrice) {
                     lblChange.Visible = true;
                     lblChangeValue.Visible = true;
@@ -169,6 +155,7 @@ namespace CarRentingSystem {
                 payment = Convert.ToDouble(txtPaymentValue.Text);
                 if (payment >= totalPrice) {
                     MessageBox.Show("Payment success. Thank you for renting car on our shop!");
+                    txtTypeOfCar.Text = string.Empty;
                     panelRent.Visible = true;
                     panelPayement.Visible = false;
                     totalPrice = 0;
@@ -192,25 +179,25 @@ namespace CarRentingSystem {
         }
 
         private void txtSeatNum_Leave(object sender, EventArgs e) {
-            string output = "Please input correct number of seats (4, 5, 7, 10, 15)";
-
             try {
-                bool isCorrectSeatNum = true;
-                while (isCorrectSeatNum) {
-
-                    if (seatNum[0] != Convert.ToByte(txtSeatNum.Text) || seatNum[1] != Convert.ToByte(txtSeatNum.Text) || seatNum[2] != Convert.ToByte(txtSeatNum.Text) || seatNum[3] != Convert.ToByte(txtSeatNum.Text) || seatNum[4] != Convert.ToByte(txtSeatNum.Text)) {
-                        isCorrectSeatNum = false;
-                    }
-                }
-
-                if (!isCorrectSeatNum) {
+                if ((Convert.ToByte(txtSeatNum.Text) == 4) || (Convert.ToByte(txtSeatNum.Text) == 5) || (Convert.ToByte(txtSeatNum.Text) == 7) || (Convert.ToByte(txtSeatNum.Text) == 10) || (Convert.ToByte(txtSeatNum.Text) == 15)) {
+                    correctSeat = true;
+                } else {
+                    MessageBox.Show("Please input correct car seat number (4, 5, 7, 10, 15) only.", "Invalid car type");
                     txtSeatNum.Text = "";
-                    MessageBox.Show(output, "Invalid number of seats");
                 }
             } catch (FormatException) {
-                MessageBox.Show(output, "Invalid number of seats");
+                MessageBox.Show("Please input a number");
             }
+        }
 
+        private void txtBrand_Leave(object sender, EventArgs e) {
+            if ((txtBrand.Text.ToLower() == "toyota") || (txtBrand.Text.ToLower() == "honda") || (txtBrand.Text.ToLower() == "mitsubishi") || (txtBrand.Text.ToLower() == "ford") || (txtBrand.Text.ToLower() == "nissan") || (txtBrand.Text.ToLower() == "suzuki")) {
+                correctBrand = true;
+            } else {
+                MessageBox.Show("Please input correct car brand (Toyota, Honda, Mitsubishi, Ford, Nissan) only.", "Invalid car brand");
+                txtBrand.Text = "";
+            }
         }
     }
 }

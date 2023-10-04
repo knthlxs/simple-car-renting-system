@@ -132,6 +132,7 @@
             txtBrand.PlaceholderText = "Toyota, Honda, BMW, ...";
             txtBrand.Size = new Size(348, 29);
             txtBrand.TabIndex = 9;
+            txtBrand.Leave += txtBrand_Leave;
             // 
             // txtModel
             // 
