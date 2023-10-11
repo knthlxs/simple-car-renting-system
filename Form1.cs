@@ -44,8 +44,8 @@ namespace CarRentingSystem {
                 }
                 default: {
                     rentedCar.Add(new Cars(brand, model, seatNum, days));
+                    break;
                 }
-                break;
             }
         }
 
@@ -56,27 +56,42 @@ namespace CarRentingSystem {
 
         private void displayOrder() {
             if (!string.IsNullOrEmpty(this.txtTypeOfCar.Text) && !string.IsNullOrEmpty(this.txtBrand.Text) && !string.IsNullOrEmpty(this.txtModel.Text) && !string.IsNullOrEmpty(this.txtSeatNum.Text) && !string.IsNullOrEmpty(this.txtDays.Text)) {
-                txtRentingSummary.Text += "RENTING SUMMARY";
-                foreach (var car in rentedCar) {
-                    if (car is Hybrid) {
-                        txtRentingSummary.Text += "\r\n\r\nType of Car: Hybrid\r\n";
-                    } else if (car is Electric) {
-                        txtRentingSummary.Text += "\r\n\r\nType of Car: Electric\r\n";
-                    } else if (car is Diesel) {
-                        txtRentingSummary.Text += "\r\n\r\nType of Car: Diesel\r\n";
-                    } else {
-                        txtRentingSummary.Text += "\r\n\r\nType of Car: Others\r\n";
-                    }
-                    totalPrice = calculateTotalPrice(car.getPrice(), car.days);
 
-                    car.showCarDetails(txtRentingSummary);
+                getOrder();
+
+                DialogResult choice = MessageBox.Show("Do you want to rent another car?", "Rent another car", MessageBoxButtons.YesNo);
+                if (choice == DialogResult.No) {
+
+                    hideTxtField();
+
+                    btnRentCar.Visible = false;
+                    btnPayment.Visible = true;
+
+                    txtRentingSummary.Text += "RENTING SUMMARY";
+
+                    foreach (var car in rentedCar) {
+                        if (car is Hybrid) {
+                            txtRentingSummary.Text += "\r\n\r\nType of Car: Hybrid\r\n";
+                        } else if (car is Electric) {
+                            txtRentingSummary.Text += "\r\n\r\nType of Car: Electric\r\n";
+                        } else if (car is Diesel) {
+                            txtRentingSummary.Text += "\r\n\r\nType of Car: Diesel\r\n";
+                        } else {
+                            txtRentingSummary.Text += "\r\n\r\nType of Car: Others\r\n";
+                        }
+                        totalPrice = calculateTotalPrice(car.getPrice(), car.days);
+
+                        car.showCarDetails(txtRentingSummary);
+                    }
+                    lblTotalPrice.Text = $"Total Price: ₱ {totalPrice.ToString()}.00";
+                } else {
+                    clearAllText();
+
                 }
-                lblTotalPrice.Text = $"Total Price: ₱ {totalPrice.ToString()}.00";
             } else {
-                MessageBox.Show("Please input all required fields.");
+                MessageBox.Show("Please input all required fields.", "Incomplete field");
             }
         }
-
 
         private void txtTypeOfCar_Leave(object sender, EventArgs e) {
             if (txtTypeOfCar.Text.ToLower().Equals("hybrid")) {
@@ -92,14 +107,43 @@ namespace CarRentingSystem {
                 lblFuel.Text = "Fuel Efficiency (mpg)";
                 txtFuel.Visible = true;
                 lblFuel.Visible = true;
-            } else {
+            } else if (txtTypeOfCar.Text.ToLower().Equals("others")) {
                 lblFuel.Text = "";
                 txtFuel.Visible = false;
+            } else {
+                MessageBox.Show("Please input correct car type (Hybrid, Electric, Diesel, Others) only.", "Invalid car type");
+                txtTypeOfCar.Text = "";
             }
-            //else {
-            //    MessageBox.Show("Please input correct car type (Hybrid, Electric, Diesel, Others) only.", "Invalid car type");
-            //    txtTypeOfCar.Text = "";
-            //}
+        }
+
+        private void showTxtField() {
+            lblTypeOfCar.Visible = true;
+            txtTypeOfCar.Visible = true;
+            lblBrand.Visible = true;
+            txtBrand.Visible = true;
+            lblModel.Visible = true;
+            txtModel.Visible = true;
+            lblSeatNum.Visible = true;
+            txtSeatNum.Visible = true;
+            lblDays.Visible = true;
+            txtDays.Visible = true;
+            lblFuel.Visible = true;
+            txtFuel.Visible = true;
+        }
+
+        private void hideTxtField() {
+            lblTypeOfCar.Visible = false;
+            txtTypeOfCar.Visible = false;
+            lblBrand.Visible = false;
+            txtBrand.Visible = false;
+            lblModel.Visible = false;
+            txtModel.Visible = false;
+            lblSeatNum.Visible = false;
+            txtSeatNum.Visible = false;
+            lblDays.Visible = false;
+            txtDays.Visible = false;
+            lblFuel.Visible = false;
+            txtFuel.Visible = false;
         }
 
         private void clearAllText() {
@@ -115,23 +159,14 @@ namespace CarRentingSystem {
 
         private void btnRentCar_Click(object sender, EventArgs e) {
             try {
-                getOrder();
-                DialogResult choice = MessageBox.Show("Do you want to rent another car?", "Rent another car", MessageBoxButtons.YesNo);
-
-                if (choice == DialogResult.No) {
-                    btnRentCar.Visible = false;
-                    displayOrder();
-                    btnPayment.Visible = true;
-                }
-
-                clearAllText();
-            } catch (Exception) {
-                MessageBox.Show("Please input all the required fields.", "Incomplete input");
+                displayOrder();
+            } catch (FormatException) {
+                MessageBox.Show("PLease input all fields.");
             }
+
         }
 
         private void btnPayment_Click(object sender, EventArgs e) {
-
             lblAmountToPayValue.Text = $"₱ {totalPrice.ToString()}.00";
             panelRent.Visible = false;
             panelPayement.Visible = true;
@@ -157,8 +192,7 @@ namespace CarRentingSystem {
             try {
                 payment = Convert.ToDouble(txtPaymentValue.Text);
                 if (payment >= totalPrice) {
-                    MessageBox.Show("Payment success. Thank you for renting car on our shop!");
-                    txtTypeOfCar.Text = string.Empty;
+                    MessageBox.Show("Payment success. Thank you for renting car on our shop!", "Payment success");
                     panelRent.Visible = true;
                     panelPayement.Visible = false;
                     totalPrice = 0;
@@ -171,7 +205,8 @@ namespace CarRentingSystem {
                     btnPayment.Visible = false;
                     payment = 0;
                     txtPaymentValue.Text = payment.ToString();
-
+                    clearAllText();
+                    showTxtField();
                 } else {
                     MessageBox.Show("Insufficient balance, please try again.");
                 }
@@ -203,10 +238,29 @@ namespace CarRentingSystem {
             }
         }
 
-      
+
 
         private void txtPaymentValue_Click(object sender, EventArgs e) {
             txtPaymentValue.Text = "";
+        }
+
+        private void txtDays_Leave(object sender, EventArgs e) {
+            try {
+                if (Convert.ToByte(txtDays.Text) < 1) {
+                    txtDays.Text = "1";
+                    MessageBox.Show("Days should be greater than or equal to 1", "Invalid input");
+                }
+            } catch (OverflowException) {
+                txtDays.Text = "1";
+                MessageBox.Show("Please input positive number of days only.", "Invalid input");
+            } catch (FormatException) {
+                txtDays.Text = "1";
+                MessageBox.Show("Please input positive number of days only.", "Invalid input");
+            }
+        }
+
+        private void txtDays_Click(object sender, EventArgs e) {
+            txtDays.Text = "";
         }
 
         /*TO CODE

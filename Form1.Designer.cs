@@ -28,7 +28,7 @@
             lblBrand = new Label();
             lblModel = new Label();
             lblSeatNum = new Label();
-            label4 = new Label();
+            lblDays = new Label();
             txtTypeOfCar = new TextBox();
             txtBrand = new TextBox();
             txtModel = new TextBox();
@@ -104,15 +104,15 @@
             lblSeatNum.TabIndex = 6;
             lblSeatNum.Text = "Number of seats";
             // 
-            // label4
+            // lblDays
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(506, 328);
-            label4.Name = "label4";
-            label4.Size = new Size(325, 25);
-            label4.TabIndex = 7;
-            label4.Text = "How many days will you rent the car?";
+            lblDays.AutoSize = true;
+            lblDays.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblDays.Location = new Point(506, 328);
+            lblDays.Name = "lblDays";
+            lblDays.Size = new Size(325, 25);
+            lblDays.TabIndex = 7;
+            lblDays.Text = "How many days will you rent the car?";
             // 
             // txtTypeOfCar
             // 
@@ -161,6 +161,8 @@
             txtDays.PlaceholderText = "1, 2, 3, ...";
             txtDays.Size = new Size(348, 29);
             txtDays.TabIndex = 12;
+            txtDays.Click += txtDays_Click;
+            txtDays.Leave += txtDays_Leave;
             // 
             // lblFuel
             // 
@@ -328,7 +330,7 @@
             panelRent.Controls.Add(txtModel);
             panelRent.Controls.Add(txtBrand);
             panelRent.Controls.Add(txtTypeOfCar);
-            panelRent.Controls.Add(label4);
+            panelRent.Controls.Add(lblDays);
             panelRent.Controls.Add(lblSeatNum);
             panelRent.Controls.Add(lblModel);
             panelRent.Controls.Add(lblBrand);
@@ -377,7 +379,7 @@
         private Label lblBrand;
         private Label lblModel;
         private Label lblSeatNum;
-        private Label label4;
+        private Label lblDays;
         private TextBox txtTypeOfCar;
         private TextBox txtBrand;
         private TextBox txtModel;
